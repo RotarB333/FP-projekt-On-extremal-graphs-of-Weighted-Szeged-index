@@ -130,7 +130,7 @@ def novo_vozlisce(G):
 
 Ko pogledamo grafe z minimalnim $wSz$ do 25 vozlišč opazimo, da so si podobni. Sklepamo: če grafu na $n$ vozliščih, ki že ima minimalni $wSz$, dodamo novo vozlišče s povezavo, bomo lažje prišli do grafa z minimalnim $wSz$, kot pa če to iščemo na čisto novem grafu.\\
 \\
-Torej, da najdemo graf na $n$ vozliščih z $min(wSz)$ bomo grafu na $(n-1)$ vozliščih z že minimiziranim $wSz$ dodali vozlišle in povezavo in ga spreminjali ter te spremembe obdržali, če je $wSz$ novega grafa manjši. Ko $wSz$ ne bomo mogli več zmanjšati, algoritem oz. ponovitve algoritma zaključimo.
+Torej, da najdemo graf na $n$ vozliščih z $min(wSz)$ bomo grafu na $(n-1)$ vozliščih z že minimiziranim $wSz$ dodali vozlišle in povezavo in ga spreminjali ter te spremembe obdržali, če je $wSz$ novega grafa manjši. Ko $wSz$ ne bomo mogli več zmanjšati, algoritem oz. ponovitve algoritma zaključimo. Algoritem deluje po sistemu simulated annealing, kjer z naključno izbiro skušamo najti ekstrem danega kriterija.
 
 \begin{verbatim}
 def min_wSz(H,koraki):
@@ -148,24 +148,25 @@ def min_wSz(H,koraki):
 
 V algoritem pa lahko tudi vstavimo graf za katerega sklepamo, da ima minimalni $wSz$, in če ne najde boljšega grafa (po zadostnem številu korakov)  lahko sklepamo, da ima ta graf že minimalni $wSz$.
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.7]{koncni_graf25}
-\caption{Graf na 25 vozliščih $wSz = 6686$}
-\end{figure}
-
 \newpage
+
 \section[Primer iskanja in ugotovitve]{Primer iskanja in ugotovitve}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{iskanje_graf26}
+\includegraphics[scale=0.4]{koncni_graf25}
+\caption{Graf na 25 vozliščih $wSz = 6686$}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{iskanje_graf26}
 \caption{Začetni graf na 26 vozliščih $wSz = 7682$}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{iskanje_graf26_2}
+\includegraphics[scale=0.4]{iskanje_graf26_2}
 \caption{Graf na 26 vozliščih po 40000 korakih $wSz = 7632$}
 \end{figure}
 
@@ -173,17 +174,18 @@ V algoritem pa lahko tudi vstavimo graf za katerega sklepamo, da ima minimalni $
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{iskanje_graf26_3}
+\includegraphics[scale=0.4]{iskanje_graf26_3}
 \caption{Graf na 26 vozliščih po 80000 korakih $wSz = 7560$}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{koncni_graf26}
+\includegraphics[scale=0.4]{koncni_graf26}
 \caption{Graf na 26 vozliščih na koncu $wSz = 7350$}
 \end{figure}
 
-Končni grafi so bili vedno drevesa, brez ciklov in vedno ena povezava manj od števila vozlišč. Rezultati podpirajo predpostavko, da imajo  minimalni $wSz$ le drevesa.
+Končni grafi so bili vedno drevesa, brez ciklov in vedno ena povezava manj od števila vozlišč. Rezultati podpirajo predpostavko, da imajo  minimalni $wSz$ le drevesa. 
+Da  zadnji graf res minimizira $wSz$ trdimo, ker se z algoritmom ne spremeni več.
 
 \newpage
 
@@ -205,7 +207,22 @@ Končni grafi so bili vedno drevesa, brez ciklov in vedno ena povezava manj od �
 \caption{Graf na 29 vozliščih na koncu $wSz = 9864$}
 \end{figure}
 
-Opazimo, kako z večanjem števila vozlišč nastane novo poddrevo, ki je povezano direktno s korenom (vozlišče 0). 
+\newpage
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{koncni_graf30}
+\caption{Graf na 30 vozliščih na koncu $wSz = 10714$}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{koncni_graf31}
+\caption{Graf na 31 vozliščih na koncu $wSz = 11580$}
+\end{figure}
+
+
+Če si pogledamo še nekaj naslednjih grafov z minimalnim $wSz$, opazimo, kako z večanjem števila vozlišč nastane novo poddrevo, ki se bliža korenu drevesa.
 
 \newpage
 
@@ -230,7 +247,7 @@ n & wSz & razlika &  n & wSz & razlika      \\ \hline
 15 & 1780& 304& 27 & 8118& 768       \\ \hline
 16 & 2100& 320& 28 & 8910& 792        \\ \hline
 17 & 2472& 372& 29 & 9864& 954         \\ \hline
-18 & 2874& 402&  &&         \\ \hline
+18 & 2874& 402& 30 & 10714& 850         \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -238,11 +255,10 @@ n & wSz & razlika &  n & wSz & razlika      \\ \hline
 \section[Viri]{Viri}
 
 \begin{thebibliography}{9}
-\bibitem{latexcompanion} 
+\bibitem{research} 
 Jan Boka, Boris Furtulab, Nikola Jedličkova in Riste Škrekovski
 \textit{On Extremal Graphs of Weighted Szeged Index} 
 https://arxiv.org/abs/1901.04764, 15 Jan 2019.
- 
 
 \end{thebibliography}
 
